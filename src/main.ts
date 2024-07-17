@@ -19,7 +19,7 @@ async function bootstrap() {
           format: winston.format.combine(
             winston.format.timestamp({ format: 'YYYY-MM-DD hh:mm:ss A' }),
             winston.format.ms(),
-            nestWinstonModuleUtilities.format.nestLike('Generic API', {
+            nestWinstonModuleUtilities.format.nestLike('Quick-Planner', {
               colors: true,
               prettyPrint: true,
               processId: true,
@@ -47,10 +47,10 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('Generic API')
-    .setDescription('Generic API')
+    .setTitle('Quick-Planner')
+    .setDescription('Quick-Planner')
     .setVersion('1.0')
-    .addTag('Generic API')
+    .addTag('Quick-Planner')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
