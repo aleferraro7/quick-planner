@@ -7,6 +7,7 @@ import { DataSourceConfig } from './config/data.source';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { NotesModule } from './notes/notes.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { NotesModule } from './notes/notes.module';
     AuthModule,
     UsersModule,
     NotesModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],
