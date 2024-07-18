@@ -51,11 +51,7 @@ export class UsersController {
 
   @Get(':id')
   async findOneById(@Param('id') id: number) {
-    try {
-      return await this.usersService.findOneById(id);
-    } catch {
-      this.logger.error('Not found user'), UsersController.name;
-    }
+    return await this.usersService.findOneById(id);
   }
 
   @RolesAccess(ROLES.ADMIN)
