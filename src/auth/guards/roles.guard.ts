@@ -1,11 +1,19 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { PUBLIC_KEY, ROLES_KEY } from 'src/constants/key-decorator';
 import { ErrorManager } from 'src/utils/error.manager';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(private readonly reflector: Reflector) {}
+  constructor(
+    private readonly reflector: Reflector,
+    private readonly logger: Logger,
+  ) {}
 
   canActivate(context: ExecutionContext): boolean {
     try {
@@ -22,7 +30,7 @@ export class RolesGuard implements CanActivate {
         ROLES_KEY,
         [context.getHandler(), context.getClass()],
       );
-      console.log(`Role required is ${requiredRoles}`);
+      this.logger.log(`Role required is ${requiredRoles}`);
 
       if (!requiredRoles) {
         return true;
@@ -36,7 +44,7 @@ export class RolesGuard implements CanActivate {
           message: 'The user is not authorized',
         });
       }
-      console.log(`The user role is ${user.role}`);
+      this.logger.log(`The user role is ${user.role}`);
 
       return true;
     } catch (e) {
