@@ -24,9 +24,9 @@ import {
 } from 'nestjs-paginate';
 import { Note, NOTE_PAGINATE_CONFIG } from './entities/note.entity';
 
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
-@RolesAccess(ROLES.USER)
+// @ApiBearerAuth()
+// @UseGuards(JwtAuthGuard, RolesGuard)
+// @RolesAccess(ROLES.USER)
 @ApiTags('Notes')
 @Controller('notes')
 export class NotesController {

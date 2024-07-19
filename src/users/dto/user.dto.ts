@@ -6,6 +6,7 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
+import { Category } from 'src/categories/entities/category.entity';
 import { ROLES } from 'src/constants/roles';
 
 export class UserDTO {
@@ -45,6 +46,21 @@ export class UserDTO {
   @IsNotEmpty()
   @IsEnum(ROLES)
   role: ROLES;
+
+  @ApiProperty({
+    description: 'Categories of the user',
+    example: [
+      {
+        id: 5,
+        createdAt: '2024-07-19T13:16:03.383Z',
+        updatedAt: '2024-07-19T13:16:03.553Z',
+        deletedAt: null,
+        title: 'Category 4',
+      },
+    ],
+    required: true,
+  })
+  categories: Category[];
 }
 
 export class CreateUserDTO {
@@ -84,6 +100,21 @@ export class CreateUserDTO {
   @IsNotEmpty()
   @IsEnum(ROLES)
   role: ROLES;
+
+  @ApiProperty({
+    description: 'Categories of the user',
+    example: [
+      {
+        id: 5,
+        createdAt: '2024-07-19T13:16:03.383Z',
+        updatedAt: '2024-07-19T13:16:03.553Z',
+        deletedAt: null,
+        title: 'Category 4',
+      },
+    ],
+    required: true,
+  })
+  categories: Category[];
 }
 
 export class UpdateUserDTO extends PartialType(UserDTO) {}

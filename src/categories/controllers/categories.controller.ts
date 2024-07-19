@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Logger,
+  Req,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
@@ -27,9 +28,9 @@ import {
   CATEGORY_PAGINATE_CONFIG,
 } from '../entities/category.entity';
 
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
-@RolesAccess(ROLES.USER)
+// @ApiBearerAuth()
+// @UseGuards(JwtAuthGuard, RolesGuard)
+// @RolesAccess(ROLES.USER)
 @ApiTags('Categories')
 @Controller('categories')
 export class CategoriesController {
@@ -39,9 +40,13 @@ export class CategoriesController {
   ) {}
 
   @Post()
-  async create(@Body() categoryDTO: CategoryDTO) {
-    return await this.categoriesService.create(categoryDTO);
+  async create(@Body() categoryDTO: CategoryDTO, @Req() req) {
+    return await this.categoriesService.createCategory(categoryDTO, req);
   }
+  // @Post()
+  // async create(@Body() categoryDTO: CategoryDTO) {
+  //   return await this.categoriesService.create(categoryDTO);
+  // }
 
   @Get()
   @ApiOkPaginatedResponse(Category, CATEGORY_PAGINATE_CONFIG)

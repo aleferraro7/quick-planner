@@ -1,4 +1,4 @@
-import { FindOneOptions } from 'typeorm';
+import { FindManyOptions, FindOneOptions } from 'typeorm';
 
 export interface BaseInterfaceRepository<T> {
   create(data: T): Promise<T>;
@@ -16,6 +16,8 @@ export interface BaseInterfaceRepository<T> {
   softDeleteById(id: number): Promise<void>;
 
   findOne(options: FindOneOptions<T>): Promise<T>;
+
+  findWithRelations(relations: FindManyOptions<T>): Promise<T[]>;
 }
 
 export type FindOptions<T> = Pick<FindOneOptions<T>, 'where'>;

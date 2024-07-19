@@ -1,5 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { Note } from 'src/notes/entities/note.entity';
+import { User } from 'src/users/entities/user.entity';
 
 export class CategoryDTO {
   @ApiProperty({
@@ -13,13 +15,23 @@ export class CategoryDTO {
   title: string;
 
   @ApiProperty({
-    description: 'description of the category',
-    example: 'Notes 1',
+    description: 'Notes of the category',
+    required: true,
+    example: [
+      {
+        id: 1,
+        title: 'Note 1',
+        description: 'description Note 1',
+      },
+    ],
+  })
+  notes: Note[];
+
+  @ApiProperty({
+    description: 'User',
     required: true,
   })
-  @IsString()
-  @IsOptional()
-  notes?: string;
+  user: User;
 }
 
 export class CreateCategoryDTO {
@@ -34,13 +46,23 @@ export class CreateCategoryDTO {
   title: string;
 
   @ApiProperty({
-    description: 'description of the category',
-    example: 'Notes 1',
+    description: 'Notes of the category',
+    required: true,
+    example: [
+      {
+        id: 1,
+        title: 'Note 1',
+        description: 'description Note 1',
+      },
+    ],
+  })
+  notes: Note[];
+
+  @ApiProperty({
+    description: 'User',
     required: true,
   })
-  @IsString()
-  @IsOptional()
-  notes?: string;
+  user: User;
 }
 
 export class UpdateCategoryDTO extends PartialType(CategoryDTO) {}

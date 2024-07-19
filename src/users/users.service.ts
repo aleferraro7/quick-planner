@@ -12,6 +12,16 @@ export class UsersService extends BaseService<User> {
     super(usersRepository);
   }
 
+  // async findOneByUsername(username: string): Promise<User | undefined> {
+  //   return this.usersRepository.findOne({ where: { username } });
+  // }
+
+  // async findCategoriesAndNotes(id: number): Promise<User> {
+  //   return this.usersRepository.findWithRelations(id, {
+  //     relations: ['categories', 'notes'],
+  //   });
+  // }
+
   public async findByEmail(email: string) {
     try {
       const user = await this.usersRepository.findOne({

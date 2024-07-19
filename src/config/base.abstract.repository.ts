@@ -1,5 +1,6 @@
 import {
   DeepPartial,
+  FindManyOptions,
   FindOneOptions,
   FindOptionsWhere,
   Repository,
@@ -62,5 +63,9 @@ export abstract class BaseAbstractRepository<T> {
       ...obj,
       ...data,
     });
+  }
+
+  public async findWithRelations(relations: FindManyOptions<T>): Promise<T[]> {
+    return await this.repository.find(relations);
   }
 }

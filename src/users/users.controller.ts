@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Logger,
+  // Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDTO, UserDTO } from './dto/user.dto';
@@ -25,9 +26,9 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { RolesAccess } from 'src/auth/decorators/roles.decorator';
 
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
-@RolesAccess(ROLES.USER)
+// @ApiBearerAuth()
+// @UseGuards(JwtAuthGuard, RolesGuard)
+// @RolesAccess(ROLES.USER)
 @ApiTags('USERS')
 @Controller('users')
 export class UsersController {
@@ -65,4 +66,10 @@ export class UsersController {
   async delete(@Param('id') id: number) {
     return await this.usersService.deleteById(id);
   }
+
+  // @Get('profile')
+  // async getProfile(@Req() req) {
+  //   const userId = req.user.id;
+  //   return this.usersService.findCategoriesAndNotes(userId);
+  // }
 }
